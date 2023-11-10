@@ -11,19 +11,8 @@ mod c1 {
 
     #[derive(Drop, Copy, Serde, starknet::Store)]
     struct MyOptionStruct {
-        c: Option<MyOptionOptionStruct>,
+        c: Option<u32>,
         d: u32,
-    }
-
-    #[derive(Drop, Copy, Serde, starknet::Store)]
-    struct MyOptionOptionStruct {
-        e: u32,
-    }
-
-    #[derive(Drop, Copy, Serde, starknet::Store)]
-    struct MyStruct2 {
-        a: Option<MyOptionStruct>,
-        b: felt252,
     }
 
     #[storage]
@@ -54,7 +43,6 @@ mod tests {
     use super::c1;
     use super::c1::MyStruct;
     use super::c1::MyOptionStruct;
-    use super::c1::MyOptionOptionStruct;
 
     #[test]
     #[available_gas(20000000)]
