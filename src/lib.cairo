@@ -11,7 +11,7 @@ mod c1 {
 
     #[derive(Drop, Copy, Serde, starknet::Store)]
     struct MyOptionStruct {
-        c: Option<u32>,
+        c: Option<u32>, // comment this line and it works
         d: u32,
     }
 
@@ -54,7 +54,8 @@ mod tests {
             b: 10,
         };
         let option_struct = MyOptionStruct {
-            c: Option::None,
+            
+            c: Option::Some(10), // comment this line and it works
             d: 20,
         };
 
@@ -64,7 +65,7 @@ mod tests {
         v.a = Option::Some(option_struct);
         c1::set(ref state, 0, 0, v);
 
-        let v = c1::get(ref state, 0, 0).expect('fail 1');
-        v.a.unwrap().d.print();
+        let v2 = c1::get(ref state, 0, 0).expect('fail 1');
+        v2.a.unwrap().d.print();
     }
 }
